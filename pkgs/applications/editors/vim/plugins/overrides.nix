@@ -978,7 +978,7 @@ self: super: {
         pname = "sg-nvim-rust";
         inherit (old) version src;
 
-        cargoHash = "sha256-1mb99WtELS64kfA2exUlVLzOj82xkFhWx0JHayosZL0=";
+        cargoHash = "sha256-JwEOfxGH2wiFkdepxBsUYrpQ2kMV6koqpkD7s+gbWw8=";
 
         nativeBuildInputs = [ pkg-config ];
 
@@ -1473,6 +1473,10 @@ self: super: {
 
   vim-pluto = super.vim-pluto.overrideAttrs {
     dependencies = with self; [ denops-vim ];
+  };
+
+  vim-sensible = super.vim-sensible.overrideAttrs {
+    patches = [ ./patches/vim-sensible/fix-nix-store-path-regex.patch ];
   };
 
   vim-snipmate = super.vim-snipmate.overrideAttrs {
