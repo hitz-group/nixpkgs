@@ -8,6 +8,7 @@
 , browserpass, gnome-browser-connector, uget-integrator, plasma5Packages, bukubrow, pipewire
 , tridactyl-native
 , fx-cast-bridge
+, keepassxc
 , udev
 , libkrb5
 , libva
@@ -70,6 +71,7 @@ let
           ++ lib.optional (cfg.enableUgetIntegrator or false) uget-integrator
           ++ lib.optional (cfg.enablePlasmaBrowserIntegration or false) plasma5Packages.plasma-browser-integration
           ++ lib.optional (cfg.enableFXCastBridge or false) fx-cast-bridge
+          ++ lib.optional (cfg.enableKeePassXC or false) keepassxc
           ++ extraNativeMessagingHosts
         ;
       libs =   lib.optionals stdenv.isLinux [ udev libva mesa libnotify xorg.libXScrnSaver cups pciutils ]
@@ -84,8 +86,9 @@ let
             ++ lib.optional sndioSupport sndio
             ++ lib.optional jackSupport libjack2
             ++ lib.optional smartcardSupport opensc
-            ++ lib.optional (cfg.speechSynthesisSupport or false) speechd
-            ++ pkcs11Modules;
+            ++ lib.optional (cfg.speechSynthesisSupport or true) speechd
+            ++ pkcs11Modules
+            ++ gtk_modules;
       gtk_modules = [ libcanberra-gtk3 ];
 
       launcherName = "${applicationName}${nameSuffix}";
