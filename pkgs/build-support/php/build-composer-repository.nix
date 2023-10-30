@@ -32,6 +32,7 @@ let
       composerNoDev = previousAttrs.composerNoDev or true;
       composerNoPlugins = previousAttrs.composerNoPlugins or true;
       composerNoScripts = previousAttrs.composerNoScripts or true;
+      composerStrictValidation = previousAttrs.composerStrictValidation or true;
 
       name = "${previousAttrs.pname}-${previousAttrs.version}-composer-repository";
 
@@ -41,6 +42,7 @@ let
       nativeBuildInputs = (previousAttrs.nativeBuildInputs or [ ]) ++ [
         composer
         composer-local-repo-plugin
+        phpDrv
         phpDrv.composerHooks.composerRepositoryHook
       ];
 
