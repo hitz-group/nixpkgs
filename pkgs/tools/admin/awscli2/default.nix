@@ -21,6 +21,7 @@ let
       });
       urllib3 = prev.urllib3.overridePythonAttrs (prev: {
         format = "setuptools";
+        pyproject = null;
         src = prev.src.override {
           version = "1.26.18";
           hash = "sha256-+OzBu6VmdBNFfFKauVW/jGe0XbeZ0VkGYmFxnjKFgKA=";
